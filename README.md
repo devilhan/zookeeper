@@ -40,6 +40,7 @@ zookeeper 集群分布式存在的问题解决方案    ： -s
 
 zookeeper 安装：
  node01~node04
+ 
     1. 安装jdk，并设置javahome*, node01:
     2. 下载zookeeper    zookeeper.apache.org
     3. tar xf zookeeper.*.tar.gz
