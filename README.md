@@ -64,8 +64,25 @@ zookeeper 安装：
         get /ooxxnetstat -natp | egrep  '(2888|3888)' 
 
 
-  Paxos
+   角色：
+     leader
+     follower
+     observer
+
+   攘其外必先安内
+
+  Paxos ： 基于消息传递的一致性算法
   ZAB
+     Zookeeper 客户端会随机的链接到 zookeeper 集群中的一个节点
+     如果是读请求，就直接从当前节点中读取数据；
+     如果是写请求，那么节点就会向 Leader 提交事务，Leader 接收到事务提交，会广播该事务，只要超过半数节点写入成功，该事务就会被提交
+     
+     
+     1. leader将client 的request转化为proposal
+     2. leader通过队列给follower发送proposal消息
+     3. leader收到follower的半数以上ACK反馈
+     4. leader向所有follower发送commit
+     
   watch
   API
   callback
