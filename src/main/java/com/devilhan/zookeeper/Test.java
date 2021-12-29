@@ -13,7 +13,6 @@ import java.io.IOException;
  */
 public class Test {
     public static void main(String[] args) throws IOException {
-        System.out.println("Hello World");
 
         /**
          * zk是有session概念，没有连接池的概念
