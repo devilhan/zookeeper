@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
  * @Description:
  */
 public class Test {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         /**
          * zk是有session概念，没有连接池的概念
