@@ -5,6 +5,7 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: devilHan
@@ -20,6 +21,7 @@ public class Test {
          *  new zk时，传入的watch，这个watch，session级别的，与node,path无关
          */
 
+        CountDownLatch countDownLatch = new CountDownLatch(1);
         ZooKeeper zk = new ZooKeeper("10.211.55.3:2181,10.211.55.4:2181,10.211.55.5:2181,10.211.55.6:2181",
                 3000, new Watcher() {
             @Override
@@ -38,6 +40,7 @@ public class Test {
                         break;
                     case SyncConnected:
                         System.out.println("connect success");
+                        countDownLatch.countDown();
                         break;
                     case AuthFailed:
                         break;
@@ -69,6 +72,7 @@ public class Test {
                 }
             }
         });
+        countDownLatch.await();
 
         ZooKeeper.States state = zk.getState();
         switch (state) {
